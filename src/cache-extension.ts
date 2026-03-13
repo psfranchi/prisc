@@ -47,10 +47,9 @@ export type PrismaCacheLogger = {
 //
 
 const defaultCacheOptions: PrismaCacheExtensionOptions = {
-  cacheableModels: [
-    { key: "id", model: "User" },
-    { key: "id", model: "ContentProvider" },
-  ],
+  // Pass cacheableModels when creating the extension, e.g.:
+  // options: { cacheableModels: [{ key: "id", model: "User" }], ... }
+  cacheableModels: [],
   cachedOperations: ["findFirst", "findUnique"],
   invalidationOperations: ["create", "update", "delete", "upsert"],
   ttlMs: 30_000,
@@ -60,9 +59,20 @@ const defaultCacheOptions: PrismaCacheExtensionOptions = {
 /**
  * Create a reusable Prisma extension that adds Redis-style caching.
  *
- * Use this in any environment (NestJS, plain Node, etc.) by providing:
- * - a `CacheClient` implementation (e.g. backed by Redis)
- * - `PrismaCacheExtensionOptions` to describe which models/operations to cache
+ * Pass config from the outside via `options`, including which models to cache:
+ *
+ * @example
+ * createPrismaCacheExtension({
+ *   client: prisma,
+ *   cache,
+ *   options: {
+ *     cacheableModels: [{ key: "id", model: "User" }, { key: "id", model: "Post" }],
+ *     cachedOperations: ["findUnique", "findFirst"],
+ *     invalidationOperations: ["create", "update", "delete", "upsert"],
+ *     ttlMs: 30_000,
+ *     keyPrefix: "myapp",
+ *   },
+ * });
  */
 export function createPrismaCacheExtension(params: {
   client: PrismaClient;
