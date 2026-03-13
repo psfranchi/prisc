@@ -77,9 +77,3 @@ const user = await prismaWithCache.user.findUnique({
   where: { id: "user-id" },
 });
 ```
-
-## Next steps
-
-- Add automated tests that spin up Prisma + Redis (or a mock `CacheClient`) to verify cache hits, misses, and invalidation across different models and queries.
-- Add small example projects for NestJS and plain Node to showcase usage.
-
