@@ -1,0 +1,35 @@
+{
+  "name": "prisma-redis-cache-extension",
+  "version": "0.1.0",
+  "description": "Framework-agnostic Prisma Client caching extension backed by Redis (or any CacheClient).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "prisma",
+    "redis",
+    "cache",
+    "caching",
+    "extension"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "@prisma/client": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "ioredis": "^5.10.0",
+    "typescript": "^5.6.0",
+    "vitest": "^1.6.1"
+  }
+}
